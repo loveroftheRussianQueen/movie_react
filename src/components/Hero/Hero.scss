@@ -1,0 +1,20 @@
+@use '../../sass/index.scss' as *;
+
+.hero{
+    @include flex(center, center);
+    flex-direction: column;
+    width:100%;
+    min-height:100vh;
+    padding: 30px 0px;
+    background-color: $body-bg;
+
+    h1{
+        font-family: "Montserrat",sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        color:$main-color;
+        font-size: 2em;
+        font-weight: 900;
+        background-color: rosybrown;
+    }
+}

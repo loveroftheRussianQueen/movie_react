@@ -1,0 +1,39 @@
+@use '../../sass/index.scss' as *;
+
+.header{
+    @include flex(center, space-between);
+    position: fixed;
+    cursor: pointer;
+    padding: 20px 0px;
+    width:100%;
+    background-color: $black;
+    height: $header-height;
+
+    h1{
+        flex:1;
+        margin-left: 1rem;
+        font-family: "Montserrat",sans-serif;
+        text-transform: uppercase;
+        color:#fff;
+        font-size: 3em;
+        font-weight: 100;
+    }
+
+    .icons{
+        flex:1;
+        margin-right: 3rem;
+        @include flex(center, space-around);
+
+        .icon{
+            font-size: 30px;
+            font-family: "Montserrat",sans-serif;
+            font-weight:100;
+            color:$white;
+            transition: all ease-out 0.2s;
+
+            &:hover{
+                color: #2196f3
+            }
+        }
+    }
+}
