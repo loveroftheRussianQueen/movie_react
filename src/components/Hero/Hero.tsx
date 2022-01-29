@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MovieProps } from '../../customTypings/types';
+import { MovieProps } from '../../types/types';
 import Container from '../Container/Container';
 import './Hero.scss';
 

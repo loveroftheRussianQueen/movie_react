@@ -3,6 +3,7 @@
 .header{
     @include flex(center, space-between);
     position: fixed;
+    margin-bottom: 3rem;
     cursor: pointer;
     padding: 20px 0px;
     width:100%;
