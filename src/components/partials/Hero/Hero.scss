@@ -1,4 +1,4 @@
-@use '../../sass/index.scss' as *;
+@use '../../../sass/index.scss' as *;
 
 .hero{
     @include flex(center, center);
@@ -15,6 +15,5 @@
         color:$main-color;
         font-size: 2em;
         font-weight: 900;
-        background-color: rosybrown;
     }
 }

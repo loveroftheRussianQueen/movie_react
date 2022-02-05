@@ -1,0 +1,67 @@
+@use '../../../sass/index.scss' as *;
+
+.header{
+    @include flex(center, space-between);
+    position: fixed;
+    cursor: pointer;
+    padding: 20px 0px;
+    width:100%;
+    background-color: rgba($color: $black, $alpha: 0.6);
+    height: $header-height;
+    z-index: 999;
+
+    @include mobile{
+        bottom:0;
+        height: $header-height - 2rem;
+    }
+
+    h1{
+        flex:1;
+        margin-left: 1rem;
+        font-family: "Montserrat",sans-serif;
+        text-transform: uppercase;
+        color:#fff;
+        font-size: 3em;
+        font-weight: 100;
+
+        @include mobile{
+            display: none;
+        }
+    }
+
+    &__icons{
+        flex:1;
+        margin-right: 3rem;
+        @include flex(center, space-around);
+
+        @include mobile{
+            margin: 0;
+        }
+
+        li{
+            font-size: 30px;
+            font-family: "Montserrat",sans-serif;
+            font-weight:100;
+            position: relative;
+            color:$white;
+            transition: all ease-out 0.2s;
+            list-style: none;
+
+            &::after{
+                content:"";
+                position: absolute;
+                bottom:0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                transition: width .5s ease;
+                height: 2px;
+                background-color: $main-color;
+            }  
+
+            &.active, &:hover{
+                color: #2196f3;
+            }
+        }
+    }
+}

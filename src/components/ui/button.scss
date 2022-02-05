@@ -1,0 +1,50 @@
+@use '../../sass/index.scss' as *;
+
+.btn{
+    cursor: pointer;
+    font-family: $font-family;
+    background-color: $main-color;
+    color: $white;
+    border-radius: $border-radius;
+    padding: 0.5rem 1.8rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-shadow: 0px 0px 7px 8px rgb(27, 77, 168);
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+
+    &:hover{
+        //box-shadow: 0px 0px 7px 15px rgb(27, 77, 168);
+        color: $main-color;
+        background-color: $white;
+    }
+
+    &.small{
+        border-width: 2px;
+        padding: .25rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+.btn-outline{
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem 1.8rem;
+    font-family: $font-family;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: $border-radius;
+    border: 3px solid $white;
+    background-color: transparent;
+    color: $white;
+    box-shadow: unset;
+    transition: color .3s ease, background-color .3s ease;
+    z-index:1;
+
+    &:hover{
+        box-shadow: unset;
+        color: $main-color;
+        background-color: $white;
+    }
+}

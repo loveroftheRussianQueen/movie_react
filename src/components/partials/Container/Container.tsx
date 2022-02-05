@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MovieProps } from '../../types/types';
+import { MovieProps } from '../../../types/types';
 import MovieItem from '../MovieItem/MovieItem';
 import './Container.scss';
 

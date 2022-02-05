@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { MovieProps, MovieType } from '../../types/types';
+import { IMovie } from '../../../types/movie';
 import './MovieItem.scss';
 
-const MovieItem = ({ movie }: { movie: MovieType }) => {
+const MovieItem = ({ movie }: { movie: IMovie }) => {
 
   const default_img = 'http://image.tmdb.org/t/p/w500/';
   return (
@@ -10,7 +10,7 @@ const MovieItem = ({ movie }: { movie: MovieType }) => {
       <div className="movie">
         <img src={default_img + movie.poster_path}/>
         <span className="movie__title">{movie.title}</span>
-        <span className="movie__rate">{movie.vote_average}</span>
+        <span className="movie__rate"></span>
         <button>Click me senpai</button>
   </div>
     </div>
