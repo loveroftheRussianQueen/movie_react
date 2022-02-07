@@ -3,6 +3,7 @@
 .poster{
     margin-bottom: 3rem;
 
+
     &__item{
         padding:5rem 0;
         width:100%;
@@ -11,6 +12,31 @@
         background-size: contain;
         background-repeat: no-repeat;
         display: none;
+
+        .arrow{
+            position: absolute;
+            cursor: pointer;
+            display: flex;
+            padding: 20px;
+            background-color: transparent;
+            font-size: 2.3rem;
+            margin: 10px;
+            top: 20%;
+            color: rgb(121, 112, 112, 0.3);
+            z-index: 1;
+
+            &.left{
+                left:0;
+            }
+
+            &.right{
+                right: 0;
+            }
+
+            &:hover{
+                color:rgb(190, 180, 180);
+            }
+        }
 
         &.active{
             display: flex;
