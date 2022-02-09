@@ -21,6 +21,7 @@
         padding: 2rem;
         background-color: $body-bg;
         width:50%;
+        height: 50%;
         opacity: 0;
         transform: translateY(-250px);
         transition: transform .6s ease, opacity .6s ease;
@@ -33,6 +34,7 @@
         top: 5px;
         font-size: 1.5rem;
         cursor: pointer;
+        color:white;
 
         &:hover{
             color: $main-color;

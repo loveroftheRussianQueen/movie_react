@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useRef, PropsWithChildren } from 'react';
-import './modal.scss';
+import { fetchVideos } from '../../../API/services';
+import { IMovie } from '../../../types/movie';
+import { IVideo, IVideos } from '../../../types/videos';
+import './Modal.scss';
 
 interface ModalProps {
     active: boolean;
-    id: string;
-    onClose?: void;
+    id?: string;
+    onClose?: React.MouseEventHandler;
 }
 
+type MainModal = ModalProps | IMovie;
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
 
@@ -15,14 +19,15 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
     useEffect(() =>{
             setActive(props.active);
     }, [props.active])
+
   return (
-    <div id={props.id} className={`modal ${active ? 'active' : ''}`}>
+    <div className={`modal ${active ? 'active' : ''}`} id={props.id}>
         {props.children}
     </div>
   );
 };
 
-export const ModalContent = (props: PropsWithChildren<ModalProps>) => {
+const ModalContent = (props: PropsWithChildren<ModalProps>) => {
     const contentRef = useRef<HTMLDivElement>(null);
 
     const closeModal = () =>{
@@ -39,6 +44,43 @@ export const ModalContent = (props: PropsWithChildren<ModalProps>) => {
                 </div>
         </div>
     )
+}
+
+export const TrailerModal = ({ movie }: { movie: PropsWithChildren<IMovie>}) => {
+        const [link, setLink] = useState<string>('');
+        const [videos, setVideos] = useState<IVideos>();
+        const iframeRef = useRef<HTMLIFrameElement>(null);
+        const videoSrc: string = 'http://www.youtube.com/embed/';
+
+        useEffect(() =>{
+            fetchVideos(movie.id).then((response) =>{
+                if(response.data.results.length > 0){
+                    setVideos(response.data);
+                    console.log(videos?.results[0].key);
+                }   
+          })
+        }, [movie])
+
+        const onClose = () => {
+            if(iframeRef && iframeRef.current){
+                    iframeRef.current.setAttribute('src', '');
+            }
+        }
+
+        return (
+            <Modal active={false} id={`modal_${movie.id}`}>
+                <ModalContent onClose={onClose} active={true}>
+                        <iframe 
+                        ref={iframeRef} 
+                        width="100%" 
+                        height="100%" 
+                        title="trailer" 
+                        src={videoSrc + videos?.results[0].key}
+                       >
+                        </iframe>
+                </ModalContent> 
+            </Modal>
+            )
 }
 
 export default Modal;

@@ -6,6 +6,7 @@ import Header from "./components/partials/Header/Header";
 import Hero from "./components/partials/Hero/Hero";
 import { ISearch } from "./types/search";
 import { IMovie } from "./types/movie";
+import { fetchPopularMovies } from "./API/services";
 
 const App = () => {
   const API_BASE = 'https://api.themoviedb.org/3/';
@@ -16,19 +17,11 @@ const App = () => {
   const [movies, setMovies] = useState<IMovie[]>();
 
   useEffect(() =>{
-        fetchPopularMovies();
+        fetchPopularMovies().then((response) =>{
+              setMovies(response.data.results);
+        })
+        console.log(movies);
   }, [])
-
-  async function fetchPopularMovies() {
-    try{
-      let url: string = `${API_BASE}movie/popular?api_key=${TMDB_API_KEY}`;
-      const response = await axios.get<MovieResults>(url);
-      setMovies(response.data.results);
-      console.log(response.data.results);
-    }catch(e){
-      alert(e);
-    }
-}
 
   return (
     <div className="App">
