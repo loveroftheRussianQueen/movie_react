@@ -19,7 +19,8 @@ const Hero = ({movies}: MovieProps) => {
   return (
     <div className="hero">
         {movies && <Poster movies={movies}/>}
-        <Container movies={movies}/>
+        <Container show={4} movies={movies}/>
+        <Container show={1} movies={movies}/>
     </div>
   );
 };

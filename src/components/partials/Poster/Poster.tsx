@@ -60,7 +60,7 @@ const Poster = ({ movies}: MovieProps ) => {
             style={{backgroundImage: `url(${big_img + movie.backdrop_path})`}}
             key={key}
             >
-                <div className="poster__item__content container">
+                <div className="poster__item__content">
                     <div className="poster__item__content__info">
                           <h2 className="title">{movie.title}</h2>
                           <div className="overview">{movie.overview}</div>

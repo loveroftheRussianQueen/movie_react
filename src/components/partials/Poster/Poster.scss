@@ -65,6 +65,9 @@
         &__content{
             @include flex(center, center);
             position: relative;
+            flex-wrap: wrap;
+            width:100%;
+            min-height:100vh;
             z-index: 1;
 
             &__info{
@@ -153,9 +156,5 @@
                 transition-delay: .9s .9s;
             }
         }
-    }
-
-    .trailer_modal{
-        
     }
 }
