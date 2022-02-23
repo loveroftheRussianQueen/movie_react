@@ -1,23 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide} from 'swiper/react';
 import { IMovie } from '../../../types/movie';
 import { MovieProps } from '../../../types/types';
 
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import './Poster.scss';
 import { Button, OutlineButton } from '../../ui/Button/Button';
-import { store } from '../../../store/store';
+//import { store } from '../../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { TrailerModal } from '../../ui/Modal/Modal';
-import { fetchVideos } from '../../../API/services';
+import { fetchPopularMovies, fetchVideos } from '../../../API/services';
 
-
-const Poster = ({ movies}: MovieProps ) => {
+const Poster = () => {
 
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [movies, setMovies] = useState<IMovie[]>([]);
+
+  useEffect(() =>{
+    fetchPopularMovies('popular').then((response) =>{
+      setMovies(response.data.results);
+      //console.log(response.data.results);
+    })
+    //console.log(movies);
+    
+  }, [])
 
   const few_movies = movies.slice(1,7);
 
@@ -25,7 +32,7 @@ const Poster = ({ movies}: MovieProps ) => {
   const small_img = 'http://image.tmdb.org/t/p/w500/';
 
   const prevSlide = () =>{
-    if(currentSlide > 0 || currentSlide >= few_movies.length - 1){
+    if(currentSlide > 0 || currentSlide >= few_movies!.length - 1){
       setCurrentSlide(currentSlide - 1);
     }
     else{
@@ -41,16 +48,6 @@ const Poster = ({ movies}: MovieProps ) => {
         setCurrentSlide(0);
     }
   }
-
-  useEffect(() =>{
-      const setModalActive = async() =>{
-        few_movies.map((movie) =>{
-          const modal = document.querySelector(`#modal_${movie.id}`);
-          console.log(modal);
-        })
-      }
-      setModalActive();
-  }, [])
 
   return (
     <div className="poster">

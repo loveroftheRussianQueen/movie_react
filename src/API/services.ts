@@ -12,8 +12,8 @@ import { MovieResults } from '../types/results';
 const API_BASE = 'https://api.themoviedb.org/3/';
 const TMDB_API_KEY = '73b31f15b44a93f52789c751c34a5d7d';
 
-export async function fetchPopularMovies() {
-      let url: string = `${API_BASE}movie/popular?api_key=${TMDB_API_KEY}`;
+export async function fetchPopularMovies(type:string) {
+      let url: string = `${API_BASE}movie/${type}?api_key=${TMDB_API_KEY}`;
       const response = await axios.get<MovieResults>(url);
       return response;
 }

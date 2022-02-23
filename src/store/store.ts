@@ -1,8 +1,13 @@
-import { createStore, applyMiddleware } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, compose, createStore }
+from "redux";
 import thunk from "redux-thunk";
-import firstReducer from "./movie/firstReducer";
-/*import { rootReducer } from "./reducers";*/
+import popular from "./movie/popular/popular";
 
-
-
-export const store = createStore(firstReducer);
+export const store = configureStore({
+	reducer: {
+	  popular
+	}
+  })
+  
+export type RootState = ReturnType<typeof store.getState>;

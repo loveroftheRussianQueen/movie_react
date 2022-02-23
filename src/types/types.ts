@@ -15,6 +15,7 @@ export type MovieResults = {
 
 
 export interface MovieProps {
-     show?: number,
-     movies: IMovie[],
+     show: number,
+     type: string,
+     movies?: IMovie[],
       };

@@ -1,36 +1,45 @@
-
 import React, { TouchEventHandler, useEffect, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import Swiper from 'react-id-swiper';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularMovies } from '../../../API/services';
+import { fetchPopular } from '../../../store/movie/popular/popular';
+import { IPopularMoviesState } from '../../../store/movie/popular/types';
+import { RootState } from '../../../store/store';
+import { IMovie } from '../../../types/movie';
 import { MovieProps } from '../../../types/types';
 import MovieItem from '../MovieItem/MovieItem';
 import './Container.scss';
 
-
-const Container = ({movies, show}: MovieProps) => {
+const Container = (/*{show, type}: MovieProps*/) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [length, setLength] = useState(movies.length);
+  //const [movies, setMovies] = useState<IMovie[]>([]);
 
-  useEffect(() => {
-    setLength(movies.length)
-}, [movies])
+  const dispatch = useDispatch();
+  const postStatus = useSelector((state:RootState) => state.popular.fetchStatus);
 
-const next = () => {
-  if (currentIndex < (length - show!)) {
-      setCurrentIndex(prevState => prevState + 1)
-  }
-}
+  const popular = useSelector((state:RootState) => state.popular.popularMovie);
 
-const prev = () => {
-  if (currentIndex > 0) {
-      setCurrentIndex(prevState => prevState - 1)
-  }
-}
+  useEffect(() =>{
+    if (postStatus === 'pending') {
+      dispatch(fetchPopular());
+    }
+  }, [postStatus, dispatch])
 
   return (
-    <div className="container">
-      <div className="carousel-container">
-            <div className="carousel-wrapper">
+    <div className="carousel-container">
+        <Swiper>
+                  
+        </Swiper>
+    </div>
+  )
+};
+
+export default Container;
+
+/*
+/*<div className="carousel-wrapper">
               {
                 currentIndex > 0 &&
                 <BsArrowLeft className="left-arrow" onClick={() => prev()}/>
@@ -47,13 +56,7 @@ const prev = () => {
                     </div>
                 </div>
                 {
-                  currentIndex < (length - show!) &&
+                  currentIndex < (length - show) &&
                   <BsArrowRight className="right-arrow" onClick={() => next()}/>
                 }
-            </div>
-        </div>
-    </div>
-  );
-};
-
-export default Container;
+            </div>*/

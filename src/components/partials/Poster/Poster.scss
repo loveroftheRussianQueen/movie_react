@@ -2,8 +2,13 @@
 
 .poster{
     margin-bottom: 3rem;
+    background-color: chartreuse;
+    width:100%;
 
-
+    @include mobile{
+        max-height: 20vh;
+    }
+    
     &__item{
         padding:5rem 0;
         width:100%;
@@ -12,6 +17,12 @@
         background-size: contain;
         background-repeat: no-repeat;
         display: none;
+
+        @include mobile{
+            max-height: 20vh;
+            background-position: top;
+            background-size: contain;
+        }
 
         .arrow{
             position: absolute;
@@ -70,6 +81,10 @@
             min-height:100vh;
             z-index: 1;
 
+            @include mobile{
+                min-height: 20vh;
+            }
+
             &__info{
                 width: 55%;
                 padding: 0 3rem;
@@ -89,6 +104,11 @@
                     line-height: 1;
                     font-family: $font-family;
                     color: $white;
+
+                    @include mobile{
+                        font-size: 1.8rem;
+                        text-align: center;
+                    }
                 }
 
                 .overview{
@@ -97,10 +117,15 @@
                     color: $white;
                     font-family: $font-family;
                     line-height: 1.5;
+
+                    @include mobile{
+                        display: none;
+                    }
                 }
 
                 .btns > * ~ *{
                     margin-left: 1rem;
+                    
                 }
                 .btns, 
                 .title, 
@@ -154,6 +179,10 @@
 
             .btns{
                 transition-delay: .9s .9s;
+
+                @include mobile{
+                    display:  none;
+                }
             }
         }
     }
