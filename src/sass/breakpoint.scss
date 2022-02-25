@@ -11,3 +11,11 @@
         @content;
     }
 }
+
+@mixin media($keys...){
+    @each $key in $keys { 
+      @media (max-width: map-get($breakpoints, $key)){
+        @content
+      } 
+    }
+  }

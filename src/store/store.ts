@@ -3,10 +3,12 @@ import { applyMiddleware, compose, createStore }
 from "redux";
 import thunk from "redux-thunk";
 import popular from "./movie/popular/popular";
+import top_rated from "./movie/top_rated/top_rated";
 
 export const store = configureStore({
 	reducer: {
-	  popular
+	  popular,
+	  top_rated
 	}
   })
   

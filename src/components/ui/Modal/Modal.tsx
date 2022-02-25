@@ -56,7 +56,7 @@ export const TrailerModal = ({ movie }: { movie: PropsWithChildren<IMovie>}) => 
             fetchVideos(movie.id).then((response) =>{
                 if(response.data.results.length > 0){
                     setVideos(response.data);
-                    console.log(videos?.results[0].key);
+                   // console.log(videos?.results[0].key);
                 }   
           })
         }, [movie])

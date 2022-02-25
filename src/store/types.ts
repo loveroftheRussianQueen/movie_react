@@ -1,11 +1,11 @@
 import { Action } from 'redux';
-import { FetchStatus } from '../../../types/fetch-status';
-import { IMovie } from '../../../types/movie';
-import { ISearch } from '../../../types/search';
-import { MovieResults } from '../../../types/types';
+import { FetchStatus } from '../types/fetch-status';
+import { IMovie } from '../types/movie';
+import { ISearch } from '../types/search';
+import { MovieResults } from '../types/types';
 
 export interface IPopularMoviesState {
-  popularMovie: MovieResults | null;
+  popularMovie: IMovie[] | null;
   fetchStatus: FetchStatus | null;
   popularSearchPage: number;
 }

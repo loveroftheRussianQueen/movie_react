@@ -14,4 +14,9 @@ $border-radius: 30px;
 $mobile-width: 600px;
 $tablet-width: 1024px;
 
+$breakpoints: (
+    mobile: $mobile-width,
+    tablet: $tablet-width,
+);
+
 $font-family: "Montserrat", sans-serif;

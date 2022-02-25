@@ -9,6 +9,11 @@
     background-color: rgba($color: $black, $alpha: 0.6);
     height: $header-height;
     z-index: 999;
+    
+    @include tablet{
+        bottom:0;
+        height: $header-height - 2rem;
+    }
 
     @include mobile{
         bottom:0;
@@ -24,9 +29,9 @@
         font-size: 3em;
         font-weight: 100;
 
-        @include mobile{
-            display: none;
-        }
+       @include media(mobile,tablet){
+           display: none;
+       }
     }
 
     &__icons{

@@ -10,7 +10,6 @@ const MovieItem = ({ movie }: { movie: IMovie }) => {
         <img src={default_img + movie.poster_path}/>
         <span className="movie__title">{movie.title}</span>
         <span className="movie__rate"></span>
-        <button>Click me senpai</button>
       </div>
   );
 };
