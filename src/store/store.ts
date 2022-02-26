@@ -4,11 +4,15 @@ from "redux";
 import thunk from "redux-thunk";
 import popular from "./movie/popular/popular";
 import top_rated from "./movie/top_rated/top_rated";
+import playing from "./movie/now-playing/now-playing";
+import upcoming from "./movie/upcoming/upcoming";
 
 export const store = configureStore({
 	reducer: {
 	  popular,
-	  top_rated
+	  top_rated,
+	  playing,
+	  upcoming
 	}
   })
   

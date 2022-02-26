@@ -1,15 +1,17 @@
 @use '../../../sass/index.scss' as *;
 
 .poster{
-    margin-bottom: 3rem;
+    top:0;
+    //margin-bottom: 3rem;
     width:100%;
 
     @include mobile{
-        max-height: 20vh;
+        max-height: 100vh;
+        margin-bottom: 0;
     }
     
     &__item{
-        padding:5rem 0;
+        padding:6rem 0;
         width:100%;
         position: relative;
         background-position: center;
@@ -17,8 +19,15 @@
         background-repeat: no-repeat;
         display: none;
 
-        @include mobile{
+        @include media(tablet){
             max-height: 20vh;
+            padding: 8rem 0;
+            background-position: top;
+            background-size: contain;
+        }
+
+        @include media(mobile){
+            max-height: 2vh;
             background-position: top;
             background-size: contain;
         }
@@ -78,19 +87,31 @@
             flex-wrap: wrap;
             width:100%;
             min-height:100vh;
+            padding: 0 2rem;
             z-index: 1;
 
+            @include media(tablet){
+                top:5vh;
+                align-self: flex-end;
+            }
+
             @include mobile{
-                min-height: 20vh;
+                min-height: 0;
+                height:20vh;
             }
 
             &__info{
-                width: 55%;
-                padding: 0 3rem;
+                width: 50%;
+                padding: 3rem 0;
                 position: relative;
 
-                @include mobile{
+                @include media(tablet){
+                    align-self: flex-end;
                     width: 100%;
+                }
+
+                @include mobile{
+                    align-self: flex-end;
                 }
 
                 & > * ~ *{
@@ -104,10 +125,17 @@
                     font-family: $font-family;
                     color: $white;
 
-                    @include mobile{
-                        font-size: 1.8rem;
-                        text-align: center;
+                    @include tablet{
+                        font-size: 3rem;
+                        text-align: left;
+                        padding: 1rem;
                     }
+                    @include mobile{
+                        font-size: 1.9rem;
+                        text-align: left;
+                        padding: 1rem;
+                    }
+
                 }
 
                 .overview{
@@ -117,14 +145,13 @@
                     font-family: $font-family;
                     line-height: 1.5;
 
-                    @include mobile{
+                    @include media(tablet, mobile){
                         display: none;
                     }
                 }
 
                 .btns > * ~ *{
                     margin-left: 1rem;
-                    
                 }
                 .btns, 
                 .title, 
@@ -148,7 +175,7 @@
                     transition: transform 0.7s ease;
                 }
 
-                @include mobile{
+                @include media(tablet, mobile){
                     display: none;
                 }
             }
@@ -179,7 +206,7 @@
             .btns{
                 transition-delay: .9s .9s;
 
-                @include mobile{
+                @include media(tablet, mobile){
                     display:  none;
                 }
             }

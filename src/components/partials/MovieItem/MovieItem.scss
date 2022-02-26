@@ -11,8 +11,12 @@
     //border-radius: 10px;
     font-family: "Montserrat",sans-serif;
 
+    @include tablet{
+        width:180px;
+    }
+
     @include mobile{
-        width:100px;
+        width:110px;
     }
  
     .movie__title{
