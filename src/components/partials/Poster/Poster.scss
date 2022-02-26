@@ -164,11 +164,11 @@
 
             &__poster{
                 flex: 1;
-                @include flex(center, flex-start);
+                @include flex(center, flex-end);
                 position: relative;
 
                 img{
-                    width: 400px;
+                    width: 60%;
                     border-radius: $border-radius;
                     box-shadow: $box-shadow;
                     transform: scale(0);

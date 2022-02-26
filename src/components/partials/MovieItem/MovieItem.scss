@@ -11,6 +11,11 @@
     //border-radius: 10px;
     font-family: "Montserrat",sans-serif;
 
+    &:hover img{
+        -webkit-transform: scale(1.05) rotate(0.01deg);
+        transform: scale(1.05) rotate(0.01deg);
+    }
+
     @include tablet{
         width:180px;
     }
@@ -35,6 +40,7 @@
 
     img{
         max-height: 50%;
+        transition: all 0.3s ease-in-out;
     }
 
 }
