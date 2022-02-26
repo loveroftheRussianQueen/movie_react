@@ -1,4 +1,4 @@
-MovieDB for searching movies. App is created using React, Typescript, Sass and Redux.
+**MovieDB for searching movies. App is created using React, Typescript, Sass and Redux.**
 
 
 
