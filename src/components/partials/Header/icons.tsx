@@ -8,37 +8,37 @@ import { HiOutlineFire } from 'react-icons/hi';
 export const icons = [
     {
         title: 'Home',
-        link: 'home',
+        link: '/home',
         icon: <AiOutlineHome className="icon"/>,
     },
     {
         title: 'Favorite',
-        link: 'favorite',
+        link: '/favorite',
         icon: <BsHeart className="icon"/>,
     },
     {
         title: 'Search',
-        link: 'search',
+        link: '/search',
         icon: <IoSearchOutline className="icon"/>,
     },
     {
         title: 'Playing',
-        link: 'playing',
+        link: '/playing',
         icon: <MdOutlineMovieCreation className="icon"/>,
     },
     {
         title: 'Upcoming',
-        link: 'upcoming',
+        link: '/upcoming',
         icon: <BsCalendarDate className="icon"/>,
     },
     {
         title: 'Popular',
-        link: 'popular',
+        link: '/popular',
         icon: <HiOutlineFire className="icon"/>,
     },
     {
         title: 'TopMovie',
-        link: 'top-rated',
+        link: '/top-rated',
         icon: <AiOutlineStar className="icon"/>,
     },
 ]

@@ -6,6 +6,7 @@ import { fetchTop, selectTop } from '../../../store/movie/top_rated/top_rated';
 import { fetchUpcoming, selectUpcoming } from '../../../store/movie/upcoming/upcoming';
 import { RootState } from '../../../store/store';
 import Container from '../Container/Container';
+import Header from '../Header/Header';
 import Poster from '../Poster/Poster';
 import './Hero.scss';
 

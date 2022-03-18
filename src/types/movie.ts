@@ -1,7 +1,10 @@
+import { IGenre } from "./genres";
+
 export interface IMovie {
     adult: boolean;
     backdrop_path: string;
     genre_ids: Array<number>;
+    genres: IGenre[];
     id: number;
     original_language: string;
     original_title: string;

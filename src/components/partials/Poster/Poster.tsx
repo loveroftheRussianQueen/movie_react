@@ -23,7 +23,6 @@ const Poster = () => {
       //console.log(response.data.results);
     })
     //console.log(movies);
-    
   }, [])
 
   const few_movies = movies.slice(1,7);

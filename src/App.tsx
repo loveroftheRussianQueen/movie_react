@@ -1,27 +1,25 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { MovieProps, MovieResults, MovieType } from "./types/types";
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import Header from "./components/partials/Header/Header";
-import Hero from "./components/partials/Hero/Hero";
-import { ISearch } from "./types/search";
-import { IMovie } from "./types/movie";
-import { fetchPopularMovies } from "./API/services";
-import Home from "./pages/Home";
-import Container from "./components/partials/Container/Container";
+import MovieItem from './components/partials/MovieItem/MovieItem';
 
-const App = () => {
+const Home = lazy(() => import('./pages/Home/Home'));
+const Movie = lazy(() => import('./pages/Movie/Movie'));
 
-  const [movies, setMovies] = useState<IMovie[]>();
+const App = () => { 
 
   return (
     <div className="App">
-      <Header/>
-      <Home/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/movie/:id" element={<Movie/>} />
+      </Routes>
+      </Suspense>
     </div>
   );
 }
 
 export default App;
-
-

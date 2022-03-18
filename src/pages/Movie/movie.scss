@@ -1,0 +1,103 @@
+@use '../../sass/index.scss' as *;
+
+.hero{
+    width:100%;
+    min-height:100vh;
+    background-color: $body-bg;
+    color: $white;
+
+    .banner{
+        height: 100vh;
+        width: 100%;
+        @include flex(center, center);
+        position: relative;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    
+            &::before{
+                content:"";
+                position: absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                @include overlay();
+            }
+    
+            &::after{
+                content:"";
+                position: absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                background-image: linear-gradient(to top, $black);
+            }
+        }
+}
+
+.movie-content{
+    @include flex(flex-start, flex-start);
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+    //margin-top: -200px;
+    position: relative;
+    padding: 0 2rem;
+    //width:70%;
+
+    &__poster{
+        flex: 1;
+
+        @include mobile{
+            display: none;
+        }
+
+        &__img{
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: $border-radius;
+            padding: 10rem;
+        }
+    }
+
+    &__info{
+        width: 70%;
+        padding-left: 2rem;
+
+    }
+
+    & > *{
+        margin-bottom: 2rem;
+    }
+
+    .title{
+        font-size: 4rem;
+        line-height: 1;
+        font-family: $font-family;
+        font-weight: 100;
+    }
+    .overview{
+        font-family: 'Montserrat', 'sans-serif';
+        font-size: 1.9rem;
+        font-weight: 100;
+    }
+
+    .genres{
+        & > * ~ *{
+            margin-left: .5rem;
+        }
+
+
+        &__item{
+            padding: .5rem 1.5rem;
+            border: 2px solid $white;
+            border-radius: $border-radius;
+            font-size: .8rem;
+            font-weight: 600;
+            background-color: $body-bg;
+        }
+    }
+}

@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import './Header.scss';
 import { icons } from './icons';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from '../../../pages/Home/Home';
 
 const Header = () => {
 
@@ -19,6 +26,7 @@ const Header = () => {
               }}
               >
                 {val.icon}
+                <Link to={val.link}/>
                 </li>
           ))}
         </ul>

@@ -1,12 +1,12 @@
 import React, { TouchEventHandler, useEffect, useState } from 'react';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import Swiper from 'react-id-swiper';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import "swiper/css";
 import { MovieProps } from '../../../types/types';
 import MovieItem from '../MovieItem/MovieItem';
 import './Container.scss';
+import { Link } from "react-router-dom";
+import Movie from '../../../pages/Movie/Movie';
 
 const Container = ({movies}:MovieProps) => {
 
@@ -51,14 +51,13 @@ return (
           //itemClass="carousel-item-padding-40-px"
           >
               {movies.map((movie) =>
-                  <MovieItem movie={movie}/>
+                <Link to={`movie/${movie.id}`}><MovieItem movie={movie}/></Link>
               )}
           </Carousel>
     </div>
   )
 }  
 export default Container;
-
 
 /*
 
