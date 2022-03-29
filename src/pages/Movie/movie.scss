@@ -1,10 +1,12 @@
 @use '../../sass/index.scss' as *;
 
 .hero{
+    position: relative;
     width:100%;
     min-height:100vh;
     background-color: $body-bg;
     color: $white;
+    overflow: hidden;
 
     .banner{
         height: 100vh;
@@ -14,6 +16,14 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+
+        @include tablet{
+            height:70vh;
+        }
+
+        @include mobile{
+            height: 50vh;
+        }
     
             &::before{
                 content:"";
@@ -45,12 +55,12 @@
     //margin-top: -200px;
     position: relative;
     padding: 0 2rem;
-    //width:70%;
+    width:70%;
 
     &__poster{
         flex: 1;
 
-        @include mobile{
+        @include media(mobile, tablet){
             display: none;
         }
 
@@ -67,29 +77,50 @@
         width: 70%;
         padding-left: 2rem;
 
+        @include media(mobile, tablet){
+            margin:auto;
+        }
+
+        .title{
+            font-size: 4rem;
+            line-height: 1;
+            font-family: $font-family;
+            font-weight: 100;
+            color: $white;
+    
+            @include tablet{
+                font-size: 2.7rem;  
+            }
+        }
     }
 
     & > *{
         margin-bottom: 2rem;
     }
 
-    .title{
-        font-size: 4rem;
-        line-height: 1;
-        font-family: $font-family;
-        font-weight: 100;
-    }
     .overview{
-        font-family: 'Montserrat', 'sans-serif';
-        font-size: 1.9rem;
+        font-family: $font-family;
+        color: black;
+        font-size: 1rem;
         font-weight: 100;
     }
 
     .genres{
-        & > * ~ *{
-            margin-left: .5rem;
+        @include media(mobile, tablet){
+            display: none;
         }
 
+        & > *{
+            font-family: $font-family;
+            font-size: 1rem;
+            padding: 10px;
+            margin-left: .5rem;
+            cursor: pointer;
+
+            &:hover{
+                background-color: rgb(31, 30, 26);
+            }
+        }
 
         &__item{
             padding: .5rem 1.5rem;
@@ -101,3 +132,70 @@
         }
     }
 }
+
+.casts{
+    max-width: 100%;
+    max-height: 100vh;
+    min-height: 0;
+    min-width: 100%;
+
+    .section__header{
+        padding: 1rem;
+    }
+
+    &__item{
+        cursor:pointer;
+        display: flex;
+        flex-direction: column;
+        width: 220px;
+        max-height: 100%;
+        padding: 5px;
+        margin: 5px 15px;
+        //border-radius: 10px;
+        font-family: "Montserrat",sans-serif;
+        transition: all 1s ease-out;
+
+        @include tablet{
+            width:180px;
+        }
+    
+        @include mobile{
+            width:110px;
+        }
+
+        img{
+            max-height: 50%;
+            transition: all 0.3s ease-in-out;
+            transform: scale(0.97);
+        }
+
+        &:hover img{
+            -webkit-transform: scale(1) rotate(0.01deg);
+            transform: scale(1) rotate(0.01deg);
+        }
+
+        .actor_name{
+            font-family: "Montserrat",sans-serif;
+            text-transform: uppercase;
+            line-height: 1.3em;
+            color:#fff;
+            font-size: 1.2em;
+            font-weight: 200;
+            text-align: center;
+    
+            @include mobile{
+                display: none;
+            }
+        }
+
+        .character_name{
+            font-weight: 400;
+            font-size: 16px;
+            text-align: center;
+            line-height: 1.6;
+            color: #80868b;
+            letter-spacing: 0.4px;
+        }
+    }
+}
+

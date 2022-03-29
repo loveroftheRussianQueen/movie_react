@@ -8,7 +8,7 @@ import { HiOutlineFire } from 'react-icons/hi';
 export const icons = [
     {
         title: 'Home',
-        link: '/home',
+        link: '/',
         icon: <AiOutlineHome className="icon"/>,
     },
     {

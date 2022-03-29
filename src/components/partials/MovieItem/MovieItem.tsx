@@ -6,14 +6,8 @@ import './MovieItem.scss';
 
 const MovieItem = ({ movie }: { movie: IMovie }) => {
 
-  const movie_single = useSelector(selectDetail);
-  const dispatch = useDispatch();
-  const movie_id = movie.id;
-  useEffect(() =>{
-        
-  }, [])
-
   const default_img = 'http://image.tmdb.org/t/p/w500/';
+
   return (
         <div className="movie">
         <img src={default_img + movie.poster_path}/>
@@ -22,6 +16,5 @@ const MovieItem = ({ movie }: { movie: IMovie }) => {
       </div>
   );
 };
-
 
 export default MovieItem;

@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { IMovie } from '../../../types/movie';
-import { MovieProps } from '../../../types/types';
 
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import './Poster.scss';
-import { Button, OutlineButton } from '../../ui/Button/Button';
-//import { store } from '../../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { TrailerModal } from '../../ui/Modal/Modal';
+import { Button, OutlineButton } from '../Button/Button';
+import { TrailerModal } from '../Modal/Modal';
 import { fetchPopularMovies, fetchVideos } from '../../../API/services';
 
 const Poster = () => {

@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { fetchCredits, selectCredits } from '../../../store/movie/credits/credits';
+import { fetchCredits, selectCredits } from '../../store/movie/credits/credits';
+import './movie.scss';
+import "react-multi-carousel/lib/styles.css";
+import { IMovieCredits } from '../../types/movie-credits';
 
-const CastList = () => {
+const CastList = ({credits}: {credits: IMovieCredits | null}) => {
 
     const responsive = {
         desktop: {
@@ -22,18 +25,13 @@ const CastList = () => {
           items: 3,
           slidesToSlide: 3 // optional, default to 1.
         }
-      };
+    };
 
-  const {id} = useParams();
-  const dispatch = useDispatch();
-  const credits = useSelector(selectCredits);
-
-  useEffect(() =>{
-        dispatch(fetchCredits(Number(id)));
-  },[dispatch, id])
+  const default_img = 'http://image.tmdb.org/t/p/w500/';
 
   return (
-    <div>
+    <>
+      { credits ? 
         <Carousel
           swipeable={true}
           draggable={false}
@@ -50,11 +48,18 @@ const CastList = () => {
           dotListClass="custom-dot-list-style"
           //itemClass="carousel-item-padding-40-px"
           >
-              {credits && credits.cast.map((actor, i) =>
-                    <span>{actor.name}</span>
-                )}
+              {credits?.cast?.map((actor, i)=>
+                  <div className="casts__item">
+                      <img src={default_img + actor?.profile_path}/>
+                      <span className="actor_name">{actor.name}</span>
+                      <span className="character_name">{actor.character}</span>
+                  </div>
+              )}
           </Carousel>
-    </div>
+          :
+          <div>Loading...</div>
+      }
+    </>
   )
 }
 

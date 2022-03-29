@@ -52,6 +52,10 @@
             transition: all ease-out 0.2s;
             list-style: none;
 
+            a{
+                color: inherit;
+            }
+
             &::after{
                 content:"";
                 position: absolute;

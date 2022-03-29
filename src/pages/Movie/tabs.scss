@@ -1,0 +1,115 @@
+@use '../../sass/index.scss' as *;
+
+.Tabs {
+    width: 90%;
+    height: auto;
+    min-height: 400px;
+    background:rgba(49, 47, 47, 0.123);
+    margin: 3.5rem auto 1.5rem;
+    padding: 2rem 1rem;
+    color: #E8F0F2;
+  }
+
+  .react-tabs__tab {
+    width: 50%;
+    padding: 1rem;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.7s;
+
+    &-list {
+        font-family: $font-family;
+        font-weight: 500;
+        font-size: 1.2em;
+        color: #80868b;
+        width: 60%;
+        margin: 0 auto 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #39A2DB;
+        padding-left: 0px;
+
+        @include mobile{
+            font-size: 1em;
+            justify-content: center;
+            width: 100%;
+        }
+      }
+
+      &--selected {
+        color: $white;
+      }
+
+      &--disabled {
+        color: GrayText;
+        cursor: default;
+      }
+
+      &:hover {
+        background: rgba(50, 224, 196, 0.15);
+      }
+
+    &-panel {
+        display: flex;
+
+        .info{
+          width: 70%;
+          padding-left: 2rem;
+
+          .title{
+            font-size: 4rem;
+            line-height: 1;
+            font-family: $font-family;
+            font-weight: 100;
+            color: $white;
+    
+            @include tablet{
+                font-size: 2.7rem;  
+            }
+        }
+
+          .overview{
+            font-family: $font-family;
+            text-align: left;
+            color: $white;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 300;
+  
+            @include mobile{
+                font-size: 1.5em;
+                line-height: 1;
+            }
+        }
+
+        }
+
+        .poster{
+            flex: 1;
+    
+            @include media(mobile, tablet){
+                display: none;
+            }
+    
+            &__img{
+              background-position: center;
+              background-size: cover;
+              background-repeat: no-repeat;
+              border-radius: $border-radius;
+              padding: 10rem;
+
+              @include media(mobile, tablet){
+                display: none;
+            }
+            }
+        }
+      }
+
+      &-panel--selected {
+        display: flex;
+        font-size: 2rem;
+        text-align: center;
+      }
+  }

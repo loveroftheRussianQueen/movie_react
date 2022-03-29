@@ -1,12 +1,8 @@
-import React, { TouchEventHandler, useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
-import "react-multi-carousel/lib/styles.css";
-import "swiper/css";
 import { MovieProps } from '../../../types/types';
 import MovieItem from '../MovieItem/MovieItem';
 import './Container.scss';
 import { Link } from "react-router-dom";
-import Movie from '../../../pages/Movie/Movie';
 
 const Container = ({movies}:MovieProps) => {
 
@@ -29,8 +25,6 @@ const Container = ({movies}:MovieProps) => {
   };
 
   const few_movies = movies.slice(1,10);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  //const [movies, setMovies] = useState<IMovie[]>([]);
 
 return (
     <div className="carousel-container">
@@ -51,34 +45,10 @@ return (
           //itemClass="carousel-item-padding-40-px"
           >
               {movies.map((movie) =>
-                <Link to={`movie/${movie.id}`}><MovieItem movie={movie}/></Link>
+                <Link to={`movie/${movie.id}`} style={{ textDecoration: 'none' }}><MovieItem movie={movie}/></Link>
               )}
           </Carousel>
     </div>
   )
 }  
 export default Container;
-
-/*
-
-<div className="carousel-wrapper">
-              {
-                currentIndex > 0 &&
-                <BsArrowLeft className="left-arrow" onClick={() => prev()}/>
-              } 
-                <div 
-                className="carousel-content-wrapper">
-                    <div 
-                    className={`carousel-content show-${show}`}
-                    style={{ transform: `translateX(-${currentIndex * (100 / 2)}%)` }}
-                    >
-                        {movies.map(movie =>
-                              <MovieItem movie={movie} key={movie.title}/>
-                          )}
-                    </div>
-                </div>
-                {
-                  currentIndex < (length - show) &&
-                  <BsArrowRight className="right-arrow" onClick={() => next()}/>
-                }
-            </div>*/
