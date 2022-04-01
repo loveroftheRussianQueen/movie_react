@@ -27,7 +27,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
   );
 };
 
-const ModalContent = (props: PropsWithChildren<ModalProps>) => {
+/*const ModalContent = (props: PropsWithChildren<ModalProps>) => {
     const contentRef = useRef<HTMLDivElement>(null);
 
     const closeModal = () =>{
@@ -75,12 +75,12 @@ export const TrailerModal = ({ movie }: { movie: PropsWithChildren<IMovie>}) => 
                         width="100%" 
                         height="100%" 
                         title="trailer" 
-                        src={videoSrc + videos?.results[0].key}
+                        //src={videoSrc + videos?.results[0].key}
                        >
                         </iframe>
                 </ModalContent> 
             </Modal>
             )
-}
+}*/
 
 export default Modal;

@@ -5,7 +5,7 @@ import { IMovie } from '../../../types/movie';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import './Poster.scss';
 import { Button, OutlineButton } from '../Button/Button';
-import { TrailerModal } from '../Modal/Modal';
+//import { TrailerModal } from '../Modal/Modal';
 import { fetchPopularMovies, fetchVideos } from '../../../API/services';
 
 const Poster = () => {
@@ -68,7 +68,7 @@ const Poster = () => {
                 </div>
                 <BsArrowLeft className="arrow left" onClick={() => prevSlide()}/>
                 <BsArrowRight className="arrow right" onClick={() => nextSlide()}/>
-                <TrailerModal key={key} movie={movie}/>
+                
             </div> 
         )}
     </div>

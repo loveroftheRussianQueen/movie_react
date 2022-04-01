@@ -1,0 +1,8 @@
+@use '../../../sass/index.scss' as *;
+
+.main{
+    @include flex(center, center);
+    width:100%;
+    min-height:100vh;
+    background-color: $body-bg;
+}

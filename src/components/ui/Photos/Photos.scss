@@ -1,0 +1,17 @@
+@use '../../../sass/index.scss' as *;
+
+.images{
+//@include flex(unset, unset);
+
+    img{
+        width:20%;
+
+        @include tablet{
+            width:33.3%;
+        }
+
+        @include mobile{
+            width: 100%;
+        }
+    }
+}

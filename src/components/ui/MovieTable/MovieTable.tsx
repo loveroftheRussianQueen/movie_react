@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { IMovie } from '../../../types/movie';
+import { getLanguageFullname } from '../../../utils/getLanguageFullname';
+import { minutesToHoursAndMinutes } from '../../../utils/minutesToHoursAndMinutes';
 import './MovieTable.scss';
 
 const MovieTable = ({movie} : {movie:IMovie}) => {
+
+    const runtime = minutesToHoursAndMinutes(movie.runtime);
+    const language = getLanguageFullname(movie.original_language);
 
   return (
     <div>
@@ -20,7 +26,7 @@ const MovieTable = ({movie} : {movie:IMovie}) => {
                 Runtime
             </td>
             <td className="details_table__item data"> 
-                {movie.runtime}
+                    {runtime}
             </td>
         </tr>
         <tr className="details_table__row">
@@ -62,7 +68,7 @@ const MovieTable = ({movie} : {movie:IMovie}) => {
                 Language
             </td>
             <td className="details_table__item data">
-                {movie.original_language}
+                {language}
             </td>
         </tr>
         <tr className="details_table__row">
@@ -82,4 +88,4 @@ const MovieTable = ({movie} : {movie:IMovie}) => {
   )
 }
 
-export default MovieTable
+export default MovieTable;

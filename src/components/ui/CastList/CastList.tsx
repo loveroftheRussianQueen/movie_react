@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
 import Carousel from 'react-multi-carousel';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { fetchCredits, selectCredits } from '../../store/movie/credits/credits';
-import './movie.scss';
+import './CastList.scss';
 import "react-multi-carousel/lib/styles.css";
-import { IMovieCredits } from '../../types/movie-credits';
+import { IMovieCredits } from '../../../types/movie-credits';
 
 const CastList = ({credits}: {credits: IMovieCredits | null}) => {
 
@@ -49,7 +46,7 @@ const CastList = ({credits}: {credits: IMovieCredits | null}) => {
           //itemClass="carousel-item-padding-40-px"
           >
               {credits?.cast?.map((actor, i)=>
-                  <div className="casts__item">
+                  <div className="casts__item" key={i}>
                       <img src={default_img + actor?.profile_path}/>
                       <span className="actor_name">{actor.name}</span>
                       <span className="character_name">{actor.character}</span>

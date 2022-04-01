@@ -2,44 +2,44 @@ import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { FetchStatus } from '../../../types/fetch-status';
 import { IMovie } from '../../../types/movie';
+import { IVideos } from '../../../types/videos';
 import { RootState } from '../../store';
-import { IMovieDetailsState } from './types';
+import { IMovieVideosState } from './types';
 
-const initialState: IMovieDetailsState = {
-    movieDetails: null,
+const initialState: IMovieVideosState = {
+    movieVideos: null,
     fetchStatus: null,
-    error: '',
 }
 
 const API_BASE = 'https://api.themoviedb.org/3/';
 const TMDB_API_KEY = '73b31f15b44a93f52789c751c34a5d7d';
 
-const detailSlice = createSlice({
-  name:'detail',
+const videosSlice = createSlice({
+  name:'videos',
   initialState,
   reducers:{},
   extraReducers(builder) {
     builder
-      .addCase(fetchDetail.pending, (state, action) => {
+      .addCase(fetchVideos.pending, (state, action) => {
         state.fetchStatus = FetchStatus.PENDING
       })
-      .addCase(fetchDetail.fulfilled, (state, action) => {
+      .addCase(fetchVideos.fulfilled, (state, action) => {
         state.fetchStatus = FetchStatus.SUCCESS
         // Add any fetched posts to the array
-        state.movieDetails = action.payload
+        state.movieVideos = action.payload
       })
-      .addCase(fetchDetail.rejected, (state, action) => {
+      .addCase(fetchVideos.rejected, (state, action) => {
         state.fetchStatus = FetchStatus.FAILURE
         //state.error = action.error.message
       })
   }
 })
 
-export const fetchDetail = createAsyncThunk('detail/fetchDetail', async (id: number) => {
-  const response = await axios.get<IMovie>(`${API_BASE}movie/${id}?api_key=${TMDB_API_KEY}`);
+export const fetchVideos = createAsyncThunk('videos/fetchVideos', async (id: number) => {
+  const response = await axios.get<IVideos>(`${API_BASE}movie/${id}/videos?api_key=${TMDB_API_KEY}`);
   console.log(response.data);
   return response.data;
 })
 
-export const selectDetail = (state: RootState) => state.detail.movieDetails;
-export default detailSlice.reducer;
+export const selectVideos = (state: RootState) => state.videos.movieVideos;
+export default videosSlice.reducer;

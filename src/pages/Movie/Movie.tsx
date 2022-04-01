@@ -2,13 +2,21 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import Header from '../../components/partials/Header/Header';
-import CastList from './CastList';
+import CastList from '../../components/ui/CastList/CastList';
 import { fetchDetail, selectDetail } from '../../store/movie/movie-detail/movie-detail';
 import './movie.scss';
 import './tabs.scss';
 import { fetchCredits, selectCredits } from '../../store/movie/credits/credits';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import MovieTable from '../../components/ui/MovieTable/MovieTable';
+import Videos from '../../components/ui/Videos/Videos';
+import { selectVideos } from '../../store/movie/movie-videos/movie-videos';
+import { fetchVideos } from '../../API/services';
+import Photos from '../../components/ui/Photos/Photos';
+import { fetchPhotos, selectPhotos } from '../../store/movie/photos/photos';
+import { fetchRecommended, selectRecommended } from '../../store/movie/recommended/recommended';
+import Container from '../../components/partials/Container/Container';
+import { fetchSimilar, selectSimilar } from '../../store/movie/similar/similar';
 
 const Movie = () => {
 
@@ -16,6 +24,10 @@ const Movie = () => {
   const dispatch = useDispatch();
   const movie = useSelector(selectDetail);
   const credits = useSelector(selectCredits);
+  const photos = useSelector(selectPhotos);
+  const videos = useSelector(selectVideos);
+  const recommended = useSelector(selectRecommended);
+  const similar = useSelector(selectSimilar);
 
   const big_img = 'http://image.tmdb.org/t/p/w1280/';
   const small_img = 'http://image.tmdb.org/t/p/w500/';
@@ -23,7 +35,9 @@ const Movie = () => {
   useEffect(() =>{
         dispatch(fetchDetail(Number(id)));
         dispatch(fetchCredits(Number(id)));
-        console.log(movie);
+        dispatch(fetchPhotos(Number(id)));
+        dispatch(fetchRecommended(Number(id)));
+        dispatch(fetchSimilar(Number(id)));
   }, [dispatch, id])
   
   return (
@@ -51,12 +65,6 @@ const Movie = () => {
               </div>
           </div>
       </div>
-      <div className="casts">
-          <div className="section__header">
-                <h2>Cast</h2>
-          </div>
-          <CastList credits={credits}/>
-        </div>
         <Tabs className="Tabs">
        <TabList>
          <Tab>OVERVIEW</Tab>
@@ -74,12 +82,30 @@ const Movie = () => {
             </div>
        </TabPanel>
        <TabPanel>
-         <p>Tab 2 works!</p>
+              
        </TabPanel>
        <TabPanel>
-         <p>Tab 3 works!</p>
+         <Photos photos={photos}/>
        </TabPanel>
      </Tabs>
+     <div className="casts">
+          <div className="section__header">
+                <h2>Cast</h2>
+          </div>
+          <CastList credits={credits}/>
+      </div>
+      <div className="casts">
+          <div className="section__header">
+                <h2>Recommended movies</h2>
+          </div>
+          <Container movies={recommended}/>
+      </div>
+      <div className="casts">
+          <div className="section__header">
+                <h2>Similar movies</h2>
+          </div>
+          <Container movies={similar}/>
+      </div>
     </div>
           )
         }

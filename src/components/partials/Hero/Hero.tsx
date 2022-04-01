@@ -9,11 +9,12 @@ import Container from '../Container/Container';
 import Header from '../Header/Header';
 import Poster from '../../ui/Poster/Poster';
 import './Hero.scss';
+import { FetchStatus } from '../../../types/fetch-status';
 
 const Hero = () => {
 
     const dispatch = useDispatch();
-    const postStatus = useSelector((state:RootState) => state.popular.status);
+    const postStatus = useSelector((state:RootState) => state.popular.fetchStatus);
   
     const popular = useSelector(selectPopular);
     const top_movies = useSelector(selectTop);
@@ -21,14 +22,11 @@ const Hero = () => {
     const upcoming = useSelector(selectUpcoming);
 
     useEffect(() =>{
-      if (postStatus === 'idle') {
         dispatch(fetchPopular());
         dispatch(fetchTop());
         dispatch(fetchPlaying());
         dispatch(fetchUpcoming());
-      }
-      console.log(playing);
-    }, [postStatus, dispatch])
+    }, [])
 
   return (
     <div className="hero">
