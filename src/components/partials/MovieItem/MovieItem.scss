@@ -1,15 +1,43 @@
 @use '../../../sass/index.scss' as *;
 
 .movie{
+    position: relative;
     cursor:pointer;
     display: flex;
     flex-direction: column;
-    width: 220px;
+    width: 250px;
     max-height: 100%;
     padding: 5px;
     margin: 5px 15px;
     //border-radius: 10px;
     font-family: "Montserrat",sans-serif;
+
+    .movie__title{
+        font-family: "Montserrat",sans-serif;
+        text-transform: uppercase;
+        line-height: 1.3em;
+        color:#fff;
+        font-size: 1.2em;
+        font-weight: 200;
+        text-align: center;
+
+        @include mobile{
+            display: none;
+        }
+    }
+
+    .movie__rate{
+        @include flex(center, center);
+        color:#2196f3;
+
+        & .MuiRating-iconFilled{
+            color: #2196f3;
+        }
+        
+        & .MuiRating-iconEmpty{
+            color: #2196f3;
+        }
+    }
 
     img{
         transform: scale(0.97);
@@ -39,25 +67,11 @@
     }
 
     @include mobile{
-        width:110px;
-    }
- 
-    .movie__title{
-        font-family: "Montserrat",sans-serif;
-        text-transform: uppercase;
-        line-height: 1.3em;
-        color:#fff;
-        font-size: 1.2em;
-        font-weight: 200;
-        text-align: center;
-
-        @include mobile{
-            display: none;
-        }
+        width:140px;
     }
 
     img{
-        max-height: 50%;
+        max-height: 90%;
         transition: all 0.3s ease-in-out;
     }
 }

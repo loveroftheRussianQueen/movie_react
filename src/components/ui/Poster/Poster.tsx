@@ -7,6 +7,9 @@ import './Poster.scss';
 import { Button, OutlineButton } from '../Button/Button';
 //import { TrailerModal } from '../Modal/Modal';
 import { fetchPopularMovies, fetchVideos } from '../../../API/services';
+import { Rating } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const Poster = () => {
 
@@ -57,6 +60,15 @@ const Poster = () => {
                     <div className="poster__item__content__info">
                           <h2 className="title">{movie.title}</h2>
                           <div className="overview">{movie.overview}</div>
+                          <Rating
+                              className="movie__rate"
+                              defaultValue={movie.vote_average/2} 
+                              precision={0.5} 
+                              size="large"
+                              readOnly
+                              icon={<StarIcon/>}
+                              emptyIcon={<StarBorderIcon/>}
+                          />
                           <div className="btns">
                           <Button className={"active"} onClick={() => console.log('fuck')}>Watch now</Button>
                           <OutlineButton className={"active"} onClick={() => setModalActive(true)}>Watch the trailer</OutlineButton>

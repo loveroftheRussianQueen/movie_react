@@ -1,4 +1,4 @@
-@use '../../../sass/index.scss' as *;
+@use '../../sass/index.scss' as *;
 
 .hero{
     @include flex(center, center);

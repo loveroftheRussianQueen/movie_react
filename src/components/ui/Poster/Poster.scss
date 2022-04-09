@@ -11,7 +11,7 @@
     }
     
     &__item{
-        padding:6rem 0;
+        padding:4.5rem 0;
         width:100%;
         position: relative;
         background-position: center;
@@ -144,6 +144,20 @@
                     color: $white;
                     font-family: $font-family;
                     line-height: 1.5;
+
+                    @include media(tablet, mobile){
+                        display: none;
+                    }
+                }
+
+                .movie__rate{
+                    & .MuiRating-iconFilled{
+                        color: #2196f3;
+                    }
+                    
+                    & .MuiRating-iconEmpty{
+                        color: #2196f3;
+                    }
 
                     @include media(tablet, mobile){
                         display: none;
