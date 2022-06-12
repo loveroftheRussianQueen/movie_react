@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/partials/Header/Header';
 import MovieItem from '../../components/partials/MovieItem/MovieItem';
 import Movies from '../../components/partials/Movies/Movies';
-import { fetchPlaying, selectPlaying, selectStats } from '../../store/movie/now-playing/now-playing';
+import { fetchPlaying, selectPlaying, selectStatus } from '../../store/movie/now-playing/now-playing';
 import { FetchStatus } from '../../types/fetch-status';
 import { IMovie } from '../../types/movie';
 import { ISearch } from '../../types/search';
@@ -20,7 +20,7 @@ const PlayingMovies = () => {
   const [totalCount, setTotalCount] = useState(0);
   const dispatch = useDispatch();
   const playing = useSelector(selectPlaying);
-  const status = useSelector(selectStats);
+  const status = useSelector(selectStatus);
 
   const handleScroll = (e: any) =>{
         if(e.scrollHeight - (e.scrollTop + window.innerHeight) < 100 
@@ -48,14 +48,15 @@ const PlayingMovies = () => {
   return (
     <div>
         <Header/>
-        <div className="main">
+    <div className="main">
       <div className="main__container">
       <div className="section__header mb-2">
                 <h2 style={{color:"#fff"}}>Now playing movies</h2>
+                <span>{movies.length ? movies.length + ' items' : '0 items'}</span>
           </div>
           <div className="main__container__grid" onScroll={handleScroll}>
           {movies.length ? movies.map((movie) =>
-                    <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}><MovieItem movie={movie}/></Link>
+                    <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}><MovieItem movie={movie} className="movie_mini"/></Link>
                 ) : <h1>fuck</h1>}
           </div>
       </div>

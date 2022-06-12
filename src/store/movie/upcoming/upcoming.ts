@@ -10,8 +10,8 @@ const initialState: IUpcomingMoviesState = {
     fetchStatus: null,
   };
 
-const API_BASE = 'https://api.themoviedb.org/3/';
-const TMDB_API_KEY = '73b31f15b44a93f52789c751c34a5d7d';
+  const API_BASE = process.env.REACT_APP_API_BASE;
+  const TMDB_API_KEY = process.env.REACT_APP_API_KEY;
 
 const upcomingSlice = createSlice({
   name:'upcoming',
@@ -43,4 +43,5 @@ export const fetchUpcoming = createAsyncThunk('recommended/fetchRecommended', as
 })
 
 export const selectUpcoming = (state: RootState) => state.upcoming.upcomingMovie;
-export default upcomingSlice.reducer
+export const selectStatus = (state: RootState) => state.upcoming.fetchStatus;
+export default upcomingSlice.reducer;

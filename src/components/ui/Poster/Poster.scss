@@ -9,6 +9,45 @@
         max-height: 100vh;
         margin-bottom: 0;
     }
+
+    .trailer{
+        display: none;
+        @include flex(center, center);
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top:0;
+        bottom :0;
+        right:0;
+        left:0;
+        z-index: 99;
+
+        &.active{
+            display: flex;
+        }
+
+        &__modal{
+            background: blanchedalmond;
+            display: none;
+
+            &.active{
+                display: block;
+            }
+        }
+
+        .icon{
+            cursor: pointer;
+            position: absolute;
+            top: 22%;
+            left: 24%;
+            width:40px;
+            height: 40px;
+            color:#51575c;
+
+            &:hover{
+                color:#2196f3;
+            }
+        }
+    }
     
     &__item{
         padding:4.5rem 0;

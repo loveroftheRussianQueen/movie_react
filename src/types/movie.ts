@@ -1,3 +1,4 @@
+import { IFavoriteMovie } from "../store/favorites/types";
 import { ICompany } from "./company";
 import { IGenre } from "./genres";
 import { ILanguage } from "./language";
@@ -23,4 +24,15 @@ export interface IMovie {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    className: string;
+  }
+
+  export type MovieProp = {
+    movie: IFavoriteMovie;
+    className?: string;
+  }
+
+  export type Movie = {
+    movie: IMovie;
+    active?: boolean;
   }

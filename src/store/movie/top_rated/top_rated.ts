@@ -10,8 +10,8 @@ const initialState: ITopMoviesState = {
     fetchStatus: null,
   };
 
-const API_BASE = 'https://api.themoviedb.org/3/';
-const TMDB_API_KEY = '73b31f15b44a93f52789c751c34a5d7d';
+  const API_BASE = process.env.REACT_APP_API_BASE;
+  const TMDB_API_KEY = process.env.REACT_APP_API_KEY;
 
 const topSlice = createSlice({
   name:'top',
@@ -43,4 +43,5 @@ export const fetchTop = createAsyncThunk('top/fetchTop', async () => {
 })
 
 export const selectTop = (state: RootState) => state.top_rated.topMovie;
+export const selectStatus = (state: RootState) => state.top_rated.fetchStatus;
 export default topSlice.reducer;

@@ -1,12 +1,25 @@
-import Carousel from 'react-multi-carousel';
+import { useRef, useState } from 'react';
 import { MovieProps } from '../../../types/types';
 import MovieItem from '../MovieItem/MovieItem';
 import './Container.scss';
 import { Link, useNavigate } from "react-router-dom";
 import { IMovie } from '../../../types/movie';
 import { MovieResults } from '../../../types/results';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore ,{ Pagination, Navigation, EffectCoverflow } from "swiper";
+import {NavigationOptions} from 'swiper/types/modules/navigation';
+import 'swiper/scss';
+import "swiper/scss/navigation";
+import "swiper/scss/effect-coverflow";
+
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Container = ({movies}: {movies:MovieResults | null}) => {
+
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
   const responsive = {
     desktop: {
@@ -26,31 +39,37 @@ const Container = ({movies}: {movies:MovieResults | null}) => {
     }
   };
 
-  const few_movies = movies?.results.slice(1,10);
+  SwiperCore.use([Navigation]);
+
+  const navigationPrevRef = useRef<HTMLDivElement>(null);
+  const navigationNextRef = useRef<HTMLDivElement>(null);
 
 return (
-    <div className="carousel-container">
+    <div>
       {movies?.results ?
-                <Carousel
-                swipeable={true}
-                draggable={false}
-                //showDots={true}
-                responsive={responsive}
-                ssr={true} // means to render carousel on server-side.
-                //infinite={true}
-                // autoPlaySpeed={2000}
-                keyBoardControl={true}
-                customTransition="all .5"
-                transitionDuration={500}
-                containerClass="carousel-container"
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-                dotListClass="custom-dot-list-style"
-                //itemClass="carousel-item-padding-40-px"
+                <Swiper
+                effect={"coverflow"}
+                navigation={{ prevEl, nextEl }}
+                rewind={true}
+                slidesPerView={6}
+                spaceBetween={30}
+                centeredSlides={true}
+                slidesPerGroup={3}
+                loop={true}
+                loopFillGroupWithBlank={true}
+                modules={[Navigation, EffectCoverflow]}
+                autoplay={true}
                 >
                     {movies?.results?.map((movie) =>
-                      <Link to={`/movie/${movie.id}`} replace style={{ textDecoration: 'none' }}><MovieItem movie={movie} key={movie.id}/></Link>
+                    <SwiperSlide>
+                      <Link to={`/movie/${movie.id}`} key={movie.id} replace style={{ textDecoration: 'none' }}>
+                        <MovieItem movie={movie} key={movie.id} className="movie"/>
+                        </Link>
+                    </SwiperSlide>
                     )}
-                </Carousel>
+                    <div ref={(node) => setPrevEl(node)} className="nav prev"><ArrowBackIosIcon className="icon"/></div>
+                    <div ref={(node) => setNextEl(node)} className="nav next"><ArrowForwardIosIcon className="icon"/></div>
+                </Swiper>
                 :
                 <div>Loading...</div>
       }

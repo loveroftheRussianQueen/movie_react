@@ -26,11 +26,13 @@
         }
 
         &__grid{
-            justify-self: center;
-            width: 70%;
+            align-self: flex-start;
+            margin-left: 20px;
+            width: 90%;
+            justify-self: flex-start;
             display: grid;
-            grid-template-columns:  repeat(4, 1fr);
-            justify-content: space-evenly;
+            grid-template-columns: repeat(6, 250px);
+            grid-template-rows: 1fr;
 
             @include tablet{
                 grid-template-columns:  repeat(3, 1fr);
@@ -42,7 +44,20 @@
     }
 
     .section__header.mb-2{
-        align-self:auto;
-        padding:10px;
+        align-self: flex-start;
+        padding: 10px;
+        margin-left: 20px;
+
+        h2{
+            font-family: $font-family;
+            font-weight: 300;
+        }
+
+        span{
+            font-family: $font-family;
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: $gray;
+        }
     }
 }

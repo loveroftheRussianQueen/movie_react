@@ -14,10 +14,14 @@
 
     .container{
         @include flex(center, center);
+        position: relative;
+        flex-wrap: wrap;
         width:100%;
-        min-height:100%;
+        height:100%;
+        z-index: 1;
 
         .section.mb-3{
+            position: relative;
             width:100%;
 
             .section__header.mb-2{

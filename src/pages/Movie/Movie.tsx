@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import Header from '../../components/partials/Header/Header';
 import CastList from '../../components/ui/CastList/CastList';
 import { fetchDetail, selectDetail } from '../../store/movie/movie-detail/movie-detail';
@@ -31,6 +31,12 @@ const Movie = () => {
 
   const big_img = 'http://image.tmdb.org/t/p/w1280/';
   const small_img = 'http://image.tmdb.org/t/p/w500/';
+
+  const location = useLocation();
+
+  useEffect(() =>{
+      window.scrollTo(0, 0);
+  }, [location])
 
   useEffect(() =>{
         dispatch(fetchDetail(Number(id)));

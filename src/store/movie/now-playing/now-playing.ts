@@ -13,8 +13,8 @@ const initialState: IPlayingMoviesState = {
     page: 1,
   };
 
-const API_BASE = 'https://api.themoviedb.org/3/';
-const TMDB_API_KEY = '73b31f15b44a93f52789c751c34a5d7d';
+  const API_BASE = process.env.REACT_APP_API_BASE;
+  const TMDB_API_KEY = process.env.REACT_APP_API_KEY;
 
 const playingSlice = createSlice({
   name:'playing',
@@ -45,5 +45,5 @@ export const fetchPlaying = createAsyncThunk('playing/fetchPlaying', async (page
 
 
 export const selectPlaying = (state: RootState) => state.playing.playingMovie;
-export const selectStats = (state: RootState) => state.playing.fetchStatus;
+export const selectStatus = (state: RootState) => state.playing.fetchStatus;
 export default playingSlice.reducer;

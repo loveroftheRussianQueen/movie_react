@@ -25,6 +25,7 @@ const Home = () => {
       dispatch(fetchTop());
       dispatch(fetchPlaying(1));
       dispatch(fetchUpcoming());
+      console.log(process.env.REACT_APP_API_KEY);
   }, [])
 
 return (
@@ -38,28 +39,32 @@ return (
               <h2 style={{color:"#fff"}}>Now playing movies</h2>
               <Link to="/playing" className="movies_link">Explore all</Link>
             </div>
-            {playing ? <Container movies={playing}/> : <div>Loading</div>}
+            {playing && <Container movies={playing}/>}
+            {!playing && <div>Loading</div>}
           </div>
            <div className="section mb-3">
             <div className="section__header mb-2">
               <h2 style={{color:"#fff"}}>Popular movies</h2>
               <Link to="/popular" className="movies_link">Explore all</Link>
             </div>
-            {popular ? <Container movies={popular}/> : <div>Loading</div>}
+            {popular && <Container movies={popular}/>}
+            {!popular && <div>Loading</div>}
           </div>
           <div className="section mb-3">
             <div className="section__header mb-2">
               <h2 style={{color:"#fff"}}>Upcoming movies</h2>
               <Link to="/upcoming" className="movies_link">Explore all</Link>
             </div>
-            {upcoming ? <Container movies={upcoming}/> : <div>Loading</div>}
+            {upcoming && <Container movies={upcoming}/>}
+            {!upcoming && <div>Loading</div>}
           </div>
           <div className="section mb-3">
             <div className="section__header mb-2">
               <h2 style={{color:"#fff"}}>Top rated movies</h2>
               <Link to="/top-rated" className="movies_link">Explore all</Link>
             </div>
-            {top_movies ? <Container movies={top_movies}/> : <div>Loading</div>}
+            {top_movies && <Container movies={top_movies}/>}
+            {!top_movies && <div>Loading</div>}
           </div>
       </div>
   </div>
