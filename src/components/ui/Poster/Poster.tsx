@@ -29,23 +29,22 @@ const Poster = () => {
         dispatch(fetchPopular());
   }, [])
 
-  const few_movies = popular?.results.slice(1,7);
 
   const big_img = 'http://image.tmdb.org/t/p/w1280/';
   const small_img = 'http://image.tmdb.org/t/p/w500/';
 
 
   const prevSlide = () =>{
-    if(currentSlide > 0 || currentSlide >= few_movies!.length - 1){
+    if(currentSlide > 0 || currentSlide >= popular!.results!.length - 1){
       setCurrentSlide(currentSlide - 1);
     }
     else{
-      setCurrentSlide(few_movies!.length - 1);
+      setCurrentSlide(popular!.results!.length - 1);
     }
   }
 
   const nextSlide = () =>{
-    if(currentSlide < few_movies!.length - 1){
+    if(currentSlide < popular!.results!.length - 1){
       setCurrentSlide(currentSlide + 1);
       console.log(currentSlide);
     }else{
@@ -55,7 +54,7 @@ const Poster = () => {
 
   return (
     <div className="poster">
-          {few_movies?.map((movie, key) =>
+          {popular?.results ? popular.results.map((movie, key) =>
             <div 
             className={`poster__item ${currentSlide===key ? 'active' : ''}`}
             style={{backgroundImage: `url(${big_img + movie.backdrop_path})`}}
@@ -86,7 +85,9 @@ const Poster = () => {
                 <BsArrowLeft className="arrow left" onClick={() => prevSlide()}/>
                 <BsArrowRight className="arrow right" onClick={() => nextSlide()}/>
             </div> 
-        )}
+              )
+            :
+            <div>Loading...</div>}
     </div>
   );
 };
