@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { IMovie } from '../../../types/movie';
 
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import './Poster.scss';
 import { Button, OutlineButton } from '../Button/Button';
 //import { TrailerModal } from '../Modal/Modal';
@@ -15,12 +14,16 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPopular, selectPopular } from '../../../store/movie/popular/popular';
 import Trailer from './Trailer';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { selectVideos } from '../../../store/movie/movie-videos/movie-videos';
 
 const Poster = () => {
 
   const [active, setActive] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const popular = useSelector(selectPopular);
+  const videos = useSelector(selectVideos);
+  const [modal, setModal] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,10 +32,8 @@ const Poster = () => {
         dispatch(fetchPopular());
   }, [])
 
-
   const big_img = 'http://image.tmdb.org/t/p/w1280/';
   const small_img = 'http://image.tmdb.org/t/p/w500/';
-
 
   const prevSlide = () =>{
     if(currentSlide > 0 || currentSlide >= popular!.results!.length - 1){
@@ -52,6 +53,10 @@ const Poster = () => {
     }
   }
 
+  const showTrailer = (id: number) =>{
+      dispatch(fetchVideos(id));
+  }
+
   return (
     <div className="poster">
           {popular?.results ? popular.results.map((movie, key) =>
@@ -60,6 +65,9 @@ const Poster = () => {
             style={{backgroundImage: `url(${big_img + movie.backdrop_path})`}}
             key={key}
             >
+              <div className={modal ? "trailer active" : "trailer"}>
+              <Trailer movie={movie} active={false}/>
+              </div>
                 <div className="poster__item__content">
                     <div className="poster__item__content__info">
                           <h2 className="title">{movie.title}</h2>
@@ -75,7 +83,7 @@ const Poster = () => {
                           />
                           <div className="btns">
                           <Button className={"active"} onClick={() => navigate(`/movie/${movie.id}`)}>Watch now</Button>
-                          <OutlineButton className={"active"}>Watch the trailer</OutlineButton>
+                          <OutlineButton className={"active"} onClick={() => showTrailer(movie.id)}>Watch the trailer</OutlineButton>
                           </div>
                     </div>
                     <div className="poster__item__content__poster">

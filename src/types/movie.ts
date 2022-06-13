@@ -32,7 +32,7 @@ export interface IMovie {
     className?: string;
   }
 
-  export type Movie = {
+  export type IMovieProp = {
     movie: IMovie;
-    active?: boolean;
+    active: boolean;
   }

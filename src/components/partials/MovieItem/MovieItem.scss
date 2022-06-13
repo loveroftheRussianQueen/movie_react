@@ -11,9 +11,14 @@
     margin: 5px 15px;
     //border-radius: 10px;
     font-family: "Montserrat",sans-serif;
+    transition: transform 330ms ease-in-out;
 
     &:hover &__favorite{
         display: block;
+    }
+
+    &:hover{
+        transform: translateY(-5px);
     }
 
     &__favorite{
@@ -68,11 +73,6 @@
             animation-timing-function: ease-in;
         }
     
-        &:hover img{
-            -webkit-transform: scale(1) rotate(0.01deg);
-            transform: scale(1) rotate(0.01deg);
-        }
-    
         @include tablet{
             width:180px;
         }
@@ -97,6 +97,11 @@
     padding: 5px;
     //border-radius: 10px;
     font-family: "Montserrat",sans-serif;
+    transition: transform 330ms ease-in-out;
+
+    &:hover{
+        transform: translateY(-5px);
+    }
 
     .movie__title{
         font-family: "Montserrat",sans-serif;
@@ -148,11 +153,6 @@
         animation-name:slide;
         animation-duration: 2s;   
         animation-timing-function: ease-in;
-    }
-
-    &:hover img{
-        -webkit-transform: scale(1) rotate(0.01deg);
-        transform: scale(1) rotate(0.01deg);
     }
 
     @include tablet{

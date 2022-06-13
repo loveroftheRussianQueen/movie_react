@@ -10,6 +10,7 @@ const Popular = lazy(() => import('./pages/PopularMovies/PopularMovies'));
 const Upcoming = lazy(() => import('./pages/UpcomingMovies/UpcomingMovies'));
 const TopRated = lazy(() => import('./pages/TopRatedMovies/TopRatedMovies'));
 const Favorite = lazy(() => import('./pages/Favorite/Favorite'));
+const Search = lazy(() => import('./pages/Search/Search'));
 
 const App = () => { 
 
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/" element={<Home/>} />
             <Route path="/movie/:id" element={<Movie/>} />
             <Route path="/favorite" element={<Favorite/>} />
+            <Route path="/search" element={<Search/>} />
             <Route path="/playing" element={<Playing/>} />
             <Route path="/popular" element={<Popular/>} />
             <Route path="/upcoming" element={<Upcoming/>} />

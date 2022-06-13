@@ -48,7 +48,6 @@ return (
     <div>
       {movies?.results ?
                 <Swiper
-                effect={"coverflow"}
                 navigation={{ prevEl, nextEl }}
                 rewind={true}
                 slidesPerView={6}
@@ -57,7 +56,7 @@ return (
                 slidesPerGroup={3}
                 loop={true}
                 loopFillGroupWithBlank={true}
-                modules={[Navigation, EffectCoverflow]}
+                modules={[Navigation]}
                 autoplay={true}
                 >
                     {movies?.results?.map((movie) =>

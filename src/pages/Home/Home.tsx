@@ -1,6 +1,7 @@
 import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ErrorBoundary from '../../components/ErrorBoundary';
 import Container from '../../components/partials/Container/Container';
 import Header from '../../components/partials/Header/Header';
 import Hero from '../../components/partials/Hero/Hero';
@@ -32,7 +33,9 @@ return (
   <>
   <Header/>
   <div className="hero">
+    <ErrorBoundary>
       <Poster/>
+    </ErrorBoundary>
       <div className="container">
           <div className="section mb-3">
             <div className="section__header mb-2">
