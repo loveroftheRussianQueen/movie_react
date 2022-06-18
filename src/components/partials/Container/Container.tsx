@@ -62,9 +62,13 @@ return (
                     slidesPerView: 4,
                     spaceBetween: 40,
                   },
-                  1024: {
-                    slidesPerView: 6,
+                  800:{
+                    slidesPerView: 4,
                     spaceBetween: 30,
+                  },
+                  1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 40,
                   },
                 }}
                 //loopFillGroupWithBlank={true}
