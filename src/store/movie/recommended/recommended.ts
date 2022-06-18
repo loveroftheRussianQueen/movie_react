@@ -29,9 +29,7 @@ const recommendedSlice = createSlice({
       .addCase(fetchRecommended.fulfilled, (state, action) => {
         state.fetchStatus = FetchStatus.SUCCESS
         // Add any fetched posts to the array
-        state.recommendedMovie = {
-            results: action.payload
-        }
+        state.recommendedMovie = action.payload
       })
       .addCase(fetchRecommended.rejected, (state, action) => {
         state.fetchStatus = FetchStatus.FAILURE
@@ -41,9 +39,9 @@ const recommendedSlice = createSlice({
 })
 
 export const fetchRecommended = createAsyncThunk('recommended/fetchRecommended', async (id: number) => {
-  const response = await axios.get<MovieResults>(`${API_BASE}movie/${id}/recommended?api_key=${TMDB_API_KEY}`);
+  const response = await axios.get<ISearch<IMovie>>(`${API_BASE}movie/${id}/recommended?api_key=${TMDB_API_KEY}`);
   console.log(response.data);
-  return response.data.results;
+  return response.data;
 })
 
 export const selectRecommended = (state: RootState) => state.recommended.recommendedMovie;

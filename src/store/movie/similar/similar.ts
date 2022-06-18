@@ -29,9 +29,7 @@ const similarSlice = createSlice({
       .addCase(fetchSimilar.fulfilled, (state, action) => {
         state.fetchStatus = FetchStatus.SUCCESS
         // Add any fetched posts to the array
-        state.similarMovie = {
-            results: action.payload
-        }
+        state.similarMovie = action.payload
       })
       .addCase(fetchSimilar.rejected, (state, action) => {
         state.fetchStatus = FetchStatus.FAILURE
@@ -41,9 +39,9 @@ const similarSlice = createSlice({
 })
 
 export const fetchSimilar = createAsyncThunk('similar/fetchSimilar', async (id: number) => {
-  const response = await axios.get<MovieResults>(`${API_BASE}movie/${id}/similar?api_key=${TMDB_API_KEY}`);
+  const response = await axios.get<ISearch<IMovie>>(`${API_BASE}movie/${id}/similar?api_key=${TMDB_API_KEY}`);
   console.log(response.data);
-  return response.data.results;
+  return response.data;
 })
 
 export const selectSimilar = (state: RootState) => state.similar.similarMovie;

@@ -11,6 +11,7 @@ import recommended from "./movie/recommended/recommended";
 import similar from "./movie/similar/similar";
 import thunk from "redux-thunk";
 import favorites from "./favorites/favorites";
+import search from "./movie/search/search";
 import { loadState } from "./localStorage";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -32,6 +33,7 @@ const persistConfig = {
 	recommended,
 	similar,
 	favorites,
+	search
   })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -21,5 +21,12 @@ export async function fetchPopularMovies(type:string) {
 export async function fetchVideos(id: number){
     let url: string = `${API_BASE}movie/${id}/videos?api_key=${TMDB_API_KEY}`;
     const response = await axios.get<IVideos>(url);
-    return response;
+    return response.data;
 }
+
+export async function fetchSearch(query: string){
+    let url: string = `${API_BASE}movie/?api_key=${TMDB_API_KEY}&query=${query}`;
+    const response = await axios.get<ISearch<IMovie>>(url);
+    return response.data;
+}
+

@@ -17,7 +17,7 @@
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
-        display: none;
+        display: flex;
 
         @include media(tablet){
             max-height: 20vh;
@@ -49,31 +49,6 @@
                 &:hover{
                     color:#2196f3;
                 }
-            }
-        }
-
-        .arrow{
-            position: absolute;
-            cursor: pointer;
-            display: flex;
-            padding: 20px;
-            background-color: transparent;
-            font-size: 2.3rem;
-            margin: 10px;
-            top: 20%;
-            color: rgb(121, 112, 112, 0.3);
-            z-index: 1;
-
-            &.left{
-                left:0;
-            }
-
-            &.right{
-                right: 0;
-            }
-
-            &:hover{
-                color:rgb(190, 180, 180);
             }
         }
 

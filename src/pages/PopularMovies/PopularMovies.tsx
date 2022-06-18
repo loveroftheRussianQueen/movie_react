@@ -21,27 +21,32 @@ const PopularMovies = () => {
   const status = useSelector(selectStatus);
 
   const handleScroll = (e: any) =>{
-        if(e.scrollHeight - (e.scrollTop + window.innerHeight) < 100 
-        && movies.length <= totalCount){
-          setFetchStatus(null);
-          setCurrentPage(prevState => prevState + 1);
-          console.log(currentPage);
-      }
+    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && totalCount < popular?.total_results!){
+        setLoading(true);
+        console.log('scroll');
+        console.log(movies);
+    }
     }
 
     useEffect(() =>{
-          document.addEventListener('scroll', handleScroll);
-    },[])
+        dispatch(fetchPopular(1));
+        document.addEventListener('scroll', handleScroll);
+        return function(){
+          document.removeEventListener('scroll', handleScroll);
+        }
+    }, [])
 
     useEffect(() =>{
-      if(status == null){
+      if(loading){
         console.log(fetchStatus);
-          dispatch(fetchPopular());
-    }else if(status == FetchStatus.SUCCESS){
-      setMovies([...movies, ...(popular?.results ?? [])]);
-      console.log(currentPage);
+        dispatch(fetchPopular(currentPage));
+        setMovies([...movies, ...(popular?.results ?? [])]);
+        setCurrentPage(prevState => prevState + 1);
+        setTotalCount(movies.length);
     }
-    }, [status, currentPage])
+    setLoading(false);
+    console.log(loading);
+    }, [currentPage, loading])
 
   return (
     <div>
@@ -55,7 +60,7 @@ const PopularMovies = () => {
           <div className="main__container__grid" onScroll={handleScroll}>
           {movies.length ? movies.map((movie) =>
                     <Link to={`/movie/${movie.id}`} style={{ textDecoration: 'none' }}><MovieItem movie={movie} className="movie_mini"/></Link>
-                ) : <h1>fuck</h1>}
+                ) : <h1 style={{color: "white"}}>Loading...</h1>}
           </div>
       </div>
     </div>

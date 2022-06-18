@@ -16,61 +16,93 @@ import { fetchPopular, selectPopular } from '../../../store/movie/popular/popula
 import Trailer from './Trailer';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { selectVideos } from '../../../store/movie/movie-videos/movie-videos';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore ,{ Pagination, Navigation, EffectCoverflow, Autoplay } from "swiper";
+import {NavigationOptions} from 'swiper/types/modules/navigation';
+import 'swiper/scss';
+import "swiper/scss/navigation";
+import Modal, { ModalContent } from '../Modal/Modal';
 
 const Poster = () => {
 
-  const [active, setActive] = useState<boolean>(false);
+  const [isActive, setActive] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const popular = useSelector(selectPopular);
-  const videos = useSelector(selectVideos);
   const [modal, setModal] = useState<boolean>(false);
 
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() =>{
-        dispatch(fetchPopular());
+        dispatch(fetchPopular(1));
   }, [])
 
-  const big_img = 'http://image.tmdb.org/t/p/w1280/';
-  const small_img = 'http://image.tmdb.org/t/p/w500/';
-
-  const prevSlide = () =>{
-    if(currentSlide > 0 || currentSlide >= popular!.results!.length - 1){
-      setCurrentSlide(currentSlide - 1);
-    }
-    else{
-      setCurrentSlide(popular!.results!.length - 1);
-    }
-  }
-
-  const nextSlide = () =>{
-    if(currentSlide < popular!.results!.length - 1){
-      setCurrentSlide(currentSlide + 1);
-      console.log(currentSlide);
-    }else{
-        setCurrentSlide(0);
-    }
-  }
-
-  const showTrailer = (id: number) =>{
-      dispatch(fetchVideos(id));
-  }
-
   return (
-    <div className="poster">
-          {popular?.results ? popular.results.map((movie, key) =>
-            <div 
-            className={`poster__item ${currentSlide===key ? 'active' : ''}`}
+      <div className="poster">
+        <Swiper
+        navigation={{ prevEl, nextEl }}
+        modules={[Autoplay, Navigation]}
+        grabCursor={true}
+        spaceBetween={0}
+        slidesPerView={1}
+        autoplay={{delay: 3000}}
+        loop={true}
+        
+        >
+            {popular?.results.map((movie, key) =>
+              <SwiperSlide key={key}>
+                    {({isActive}) => (
+                      <Poster_Item movie={movie} className={isActive ? 'active' : ''}/>
+                    )}
+              </SwiperSlide>  
+            )}
+        </Swiper>
+        {
+          popular?.results?.map((movie, key) =>
+            <TrailerModal key={key} movie={movie}/>
+          )
+        }
+      </div>
+  );
+};
+
+export default Poster;
+
+const Poster_Item = (props: any) =>{
+
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const movie = props.movie;
+
+    const big_img = 'http://image.tmdb.org/t/p/w1280/';
+    const small_img = 'http://image.tmdb.org/t/p/w500/';
+
+    const setModalActive = async (props: any) =>{
+      const modal = document.querySelector(`#modal_${movie.id}`);
+
+      const videos = await fetchVideos(movie.id);
+
+      if(videos.results.length > 0){
+        const src = 'https://www.youtube.com/embed/' + videos?.results[0].key;
+        modal?.querySelector('.modal__content > iframe')?.setAttribute('src', src);
+      }else{
+        modal?.querySelector('.modal__content > iframe')?.setAttribute('src', "");
+      }
+
+      modal?.classList.toggle('active');
+    }
+
+    return(
+      <div 
+            className="poster__item active"
             style={{backgroundImage: `url(${big_img + movie.backdrop_path})`}}
-            key={key}
             >
-              <div className={modal ? "trailer active" : "trailer"}>
-              <Trailer movie={movie} active={false}/>
-              </div>
-                <div className="poster__item__content">
-                    <div className="poster__item__content__info">
-                          <h2 className="title">{movie.title}</h2>
+              <div className="poster__item__content">
+                <div className="poster__item__content__info">
+                <h2 className="title">{movie.title}</h2>
                           <div className="overview">{movie.overview}</div>
                           <Rating
                               className="movie__rate"
@@ -83,23 +115,31 @@ const Poster = () => {
                           />
                           <div className="btns">
                           <Button className={"active"} onClick={() => navigate(`/movie/${movie.id}`)}>Watch now</Button>
-                          <OutlineButton className={"active"} onClick={() => showTrailer(movie.id)}>Watch the trailer</OutlineButton>
+                          <OutlineButton className={"active"} onClick={setModalActive}>Watch the trailer</OutlineButton>
                           </div>
-                    </div>
-                    <div className="poster__item__content__poster">
-                          <img src={small_img + movie.backdrop_path}/>
-                    </div>
                 </div>
-                <BsArrowLeft className="arrow left" onClick={() => prevSlide()}/>
-                <BsArrowRight className="arrow right" onClick={() => nextSlide()}/>
+                <div className="poster__item__content__poster">
+                    <img src={small_img + movie.backdrop_path}/>
+                </div>
+              </div>
+              {props.children}
             </div> 
-              )
-            :
-            <div>Loading...</div>}
-    </div>
-  );
-};
+    )
+}
 
-export default Poster;
+const TrailerModal = (props: any) =>{
+    const movie = props.movie;
 
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+
+    const onClose = () => iframeRef.current?.setAttribute('src', '');
+
+    return(
+      <Modal active={false} id={`modal_${movie.id}`}>
+          <ModalContent onClose={onClose}>
+            <iframe ref={iframeRef} width="100%" height="500px" title="trailer"></iframe>
+          </ModalContent>
+      </Modal>
+    )
+}
 

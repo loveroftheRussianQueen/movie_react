@@ -35,7 +35,6 @@ const Favorite = () => {
           document.addEventListener('scroll', handleScroll);
     },[])
 
-
   return (
     <div>
         <Header/>

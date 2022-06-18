@@ -5,7 +5,6 @@ import './Container.scss';
 import { Link, useNavigate } from "react-router-dom";
 import { IMovie } from '../../../types/movie';
 import { MovieResults } from '../../../types/results';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore ,{ Pagination, Navigation, EffectCoverflow } from "swiper";
 import {NavigationOptions} from 'swiper/types/modules/navigation';
@@ -15,8 +14,9 @@ import "swiper/scss/effect-coverflow";
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { ISearch } from '../../../types/search';
 
-const Container = ({movies}: {movies:MovieResults | null}) => {
+const Container = ({movies}: {movies:ISearch<IMovie> | null}) => {
 
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
@@ -55,11 +55,11 @@ return (
                 centeredSlides={true}
                 slidesPerGroup={3}
                 loop={true}
-                loopFillGroupWithBlank={true}
+                //loopFillGroupWithBlank={true}
                 modules={[Navigation]}
                 autoplay={true}
                 >
-                    {movies?.results?.map((movie) =>
+                    {movies.results.map((movie) =>
                     <SwiperSlide>
                       <Link to={`/movie/${movie.id}`} key={movie.id} replace style={{ textDecoration: 'none' }}>
                         <MovieItem movie={movie} key={movie.id} className="movie"/>

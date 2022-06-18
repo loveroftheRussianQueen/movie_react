@@ -34,6 +34,9 @@
         margin-right: 3rem;
         @include flex(center, space-around);
 
+        @include mobile{
+            gap: 20px;
+        }
         li{
             font-size: 30px;
             font-family: "Montserrat",sans-serif;

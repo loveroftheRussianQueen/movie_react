@@ -43,7 +43,6 @@ export const fetchPlaying = createAsyncThunk('playing/fetchPlaying', async (page
   return response.data;
 })
 
-
 export const selectPlaying = (state: RootState) => state.playing.playingMovie;
 export const selectStatus = (state: RootState) => state.playing.fetchStatus;
 export default playingSlice.reducer;

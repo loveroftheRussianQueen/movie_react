@@ -4,6 +4,6 @@ import { MovieResults } from "../../../types/results";
 import { ISearch } from "../../../types/search";
 
 export interface ISimilarMoviesState {
-    similarMovie: MovieResults | null;
+    similarMovie: ISearch<IMovie>| null;
     fetchStatus: FetchStatus | null;
   }

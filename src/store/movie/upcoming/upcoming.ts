@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { FetchStatus } from '../../../types/fetch-status';
+import { IMovie } from '../../../types/movie';
+import { ISearch } from '../../../types/search';
 import { MovieResults } from '../../../types/types';
 import { RootState } from '../../store';
 import { IUpcomingMoviesState } from './types';
@@ -25,9 +27,7 @@ const upcomingSlice = createSlice({
       .addCase(fetchUpcoming.fulfilled, (state, action) => {
         state.fetchStatus = FetchStatus.SUCCESS
         // Add any fetched posts to the array
-        state.upcomingMovie = {
-            results: action.payload
-        }
+        state.upcomingMovie = action.payload
       })
       .addCase(fetchUpcoming.rejected, (state, action) => {
         state.fetchStatus = FetchStatus.FAILURE
@@ -36,10 +36,10 @@ const upcomingSlice = createSlice({
   }
 })
 
-export const fetchUpcoming = createAsyncThunk('recommended/fetchRecommended', async () => {
-  const response = await axios.get<MovieResults>(`${API_BASE}movie/upcoming?api_key=${TMDB_API_KEY}`);
+export const fetchUpcoming = createAsyncThunk('upcoming/fetchUpcoming', async (page: number) => {
+  const response = await axios.get<ISearch<IMovie>>(`${API_BASE}movie/upcoming?api_key=${TMDB_API_KEY}&page=${page}`);
   console.log(response.data);
-  return response.data.results;
+  return response.data
 })
 
 export const selectUpcoming = (state: RootState) => state.upcoming.upcomingMovie;

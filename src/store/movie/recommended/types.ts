@@ -4,6 +4,6 @@ import { MovieResults } from "../../../types/results";
 import { ISearch } from "../../../types/search";
 
 export interface IRecommendedMoviesState {
-    recommendedMovie: MovieResults | null;
+    recommendedMovie: ISearch<IMovie> | null;
     fetchStatus: FetchStatus | null;
   }

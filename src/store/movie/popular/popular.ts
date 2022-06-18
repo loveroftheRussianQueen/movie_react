@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { FetchStatus } from '../../../types/fetch-status';
+import { IMovie } from '../../../types/movie';
+import { ISearch } from '../../../types/search';
 import { MovieResults } from '../../../types/types';
 import { RootState } from '../../store';
 import { IPopularMoviesState } from './types';
@@ -25,9 +27,7 @@ const popularSlice = createSlice({
       .addCase(fetchPopular.fulfilled, (state, action) => {
         state.fetchStatus = FetchStatus.SUCCESS
         // Add any fetched posts to the array
-        state.popularMovie = {
-            results: action.payload
-        }
+        state.popularMovie = action.payload
       })
       .addCase(fetchPopular.rejected, (state, action) => {
         state.fetchStatus = FetchStatus.FAILURE
@@ -36,10 +36,10 @@ const popularSlice = createSlice({
   }
 })
 
-export const fetchPopular = createAsyncThunk('popular/fetchPopular', async () => {
-  const response = await axios.get<MovieResults>(`${API_BASE}movie/popular?api_key=${TMDB_API_KEY}`);
+export const fetchPopular = createAsyncThunk('popular/fetchPopular', async (page: number) => {
+  const response = await axios.get<ISearch<IMovie>>(`${API_BASE}movie/popular?api_key=${TMDB_API_KEY}&page=${page}`);
   console.log(response.data);
-  return response.data.results;
+  return response.data;
 })
 
 export const selectPopular = (state: RootState) => state.popular.popularMovie;

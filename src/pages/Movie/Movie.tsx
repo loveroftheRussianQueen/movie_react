@@ -17,6 +17,7 @@ import { fetchPhotos, selectPhotos } from '../../store/movie/photos/photos';
 import { fetchRecommended, selectRecommended } from '../../store/movie/recommended/recommended';
 import Container from '../../components/partials/Container/Container';
 import { fetchSimilar, selectSimilar } from '../../store/movie/similar/similar';
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 const Movie = () => {
 
@@ -104,13 +105,17 @@ const Movie = () => {
           <div className="section__header">
                 <h2>Recommended movies</h2>
           </div>
+          <ErrorBoundary>
           <Container movies={recommended}/>
+          </ErrorBoundary>
       </div>
       <div className="casts">
           <div className="section__header">
                 <h2>Similar movies</h2>
           </div>
+          <ErrorBoundary>
           <Container movies={similar}/>
+          </ErrorBoundary>
       </div>
     </div>
           )

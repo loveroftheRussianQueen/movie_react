@@ -22,10 +22,10 @@ const Home = () => {
   const upcoming = useSelector(selectUpcoming);
 
   useEffect(() =>{
-      dispatch(fetchPopular());
-      dispatch(fetchTop());
+      dispatch(fetchPopular(1));
+      dispatch(fetchTop(1));
       dispatch(fetchPlaying(1));
-      dispatch(fetchUpcoming());
+      dispatch(fetchUpcoming(1));
       console.log(process.env.REACT_APP_API_KEY);
   }, [])
 

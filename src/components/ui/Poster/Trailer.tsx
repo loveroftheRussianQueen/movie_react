@@ -15,7 +15,7 @@ const Trailer:FC<IMovieProp> = ({movie, active} : IMovieProp) => {
 
   useEffect(() =>{
       dispatch(fetchVideos(movie.id));
-  }, [])
+  }, [movie.title])
 
   return (
     <div className="trailer__item">
