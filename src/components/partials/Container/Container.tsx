@@ -6,11 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { IMovie } from '../../../types/movie';
 import { MovieResults } from '../../../types/results';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore ,{ Pagination, Navigation, EffectCoverflow } from "swiper";
-import {NavigationOptions} from 'swiper/types/modules/navigation';
+import SwiperCore ,{ Pagination, Navigation } from "swiper";
 import 'swiper/scss';
 import "swiper/scss/navigation";
-import "swiper/scss/effect-coverflow";
 
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -55,6 +53,20 @@ return (
                 centeredSlides={true}
                 slidesPerGroup={3}
                 loop={true}
+                breakpoints={{
+                  360: {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 30,
+                  },
+                }}
                 //loopFillGroupWithBlank={true}
                 modules={[Navigation]}
                 autoplay={true}
